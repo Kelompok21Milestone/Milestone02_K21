@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import '@fontsource/nunito';
 import { BsXCircle, BsShieldFillExclamation} from "react-icons/bs";
+import { useDisclosure } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import FormalHeading from '../FormalHeading';
 import SurveyOverview from './formElements/SurveyOverview';
@@ -17,7 +18,6 @@ import Question from './formElements/Question';
 import SurveyPoints from './formElements/SurveyPoints';
 import { useState } from 'react';
 import { createNewSurvey } from '../../firebase';
-import { useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 
 const FormBuilder = () => {

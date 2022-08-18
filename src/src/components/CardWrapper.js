@@ -11,7 +11,7 @@ export default function CardWrapper(props){
         pb={4}
         pt={4} 
         overflowX={'auto'}
-        overflowY={'scroll'} 
+        overflowY={'auto'} 
         whiteSpace='nowrap' 
         css={{
             "&::-webkit-scrollbar": {height:"10px", width:'10px',},

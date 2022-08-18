@@ -1,4 +1,4 @@
-import { Text, HStack, Image, VStack, Button, Link } from '@chakra-ui/react';
+import { Text, HStack, Image, VStack, Button} from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import FormalHeading from "../FormalHeading";
 

@@ -8,6 +8,15 @@ import {
   InputLeftElement,
   InputRightElement,
 } from '@chakra-ui/react';
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+
+} from '@chakra-ui/react';
 import { FormControl } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import {
@@ -24,11 +33,17 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import { BsXCircle, BsShieldFillExclamation} from "react-icons/bs";
+import { useDisclosure} from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 import { getDoc, doc, getFirestore } from 'firebase/firestore';
 import { createNewUserData } from '../../firebase';
 import LoginGoogle from '../LoginGoogle';
 
 const SignUpBox = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickPassword = () => setShowPassword(!showPassword);
 
@@ -178,7 +193,7 @@ const SignUpBox = () => {
           <Spacer></Spacer>
           <Stack alignItems='center'>
             <Button
-              onClick={signUpAccount}
+              onClick={onOpen}
               bg='#49439B'
               color='white'
               _hover={{ background: '#1A1287' }}
@@ -195,6 +210,36 @@ const SignUpBox = () => {
           </Stack>
         </VStack>
       </Flex>
+      <AlertDialog
+          motionPreset='slideInBottom'
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+          isCentered
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                Signup Account
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                Are you sure you want to signup this account?
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button colorScheme='red' ref={cancelRef} onClick={onClose} leftIcon={<BsXCircle/>}>
+                  Cancel
+                </Button>
+                <NavLink to='/login'>
+                  <Button colorScheme='green' onClick={signUpAccount} ml={3} leftIcon={<BsShieldFillExclamation/>}>
+                    Proceed
+                  </Button>
+                </NavLink>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
     </Container>
   );
 };
